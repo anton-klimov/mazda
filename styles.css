@@ -1,0 +1,108 @@
+﻿/*---------------------------------------------------------------------------*/
+.header
+{
+	width: 100%;
+	height: 203px;	
+	background-image: url("img/01.jpg");
+	background-repeat: no-repeat;
+}
+/*---------------------------------------------------------------------------*/
+.main_block
+{
+	max-width: 1024px; 
+	width: 100%;
+	min-width:830px;
+	float: none;
+	margin-left:auto;
+	margin-right:auto;
+}
+/*---------------------------------------------------------------------------*/
+.main_text_block , .some_left_block
+{
+	min-height: 510px;
+	margin-bottom:5px;
+}
+/*---------------------------------------------------------------------------*/
+.main_text_block
+{
+	background-color: rgb(255, 255, 255);
+	float:right;	
+	width:75%;
+}
+/*---------------------------------------------------------------------------*/
+.some_left_block
+{
+	float:left;
+	width: 24%;
+	font-size: 20pt;
+}
+/*---------------------------------------------------------------------------*/
+.border
+{
+	border: black 1px solid;
+}
+
+/*---------------------------------------------------------------------------*/
+a.test
+{
+	color: blue;
+	font-size: 14pt;
+	font-weight: bold;
+	text-decoration: none;
+}
+a.test:visited
+{
+	color: blue;
+}
+a.test:hover
+{
+	color: red;
+}
+/*---------------------------------------------------------------------------*/
+.bottom
+{
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	background-color: rgb(255, 255, 255);
+	background-image: url("images/css_background-repeat_2.png");
+	background-repeat: repeat-x;
+	margin-bottom: 30px;
+}
+/*---------------------------------------------------------------------------*/
+body
+{
+	background-image: url("img/grey.png");
+	background-attachment: fixed;
+	background-position: 50% 50%;		/*выставляем позицию фона*/
+	background-repeat: no-repeat;		/*Запрет повторения*/
+	background-size: cover;				/*Масштабирует изображение с сохранением пропорций так, чтобы его ширина или высота равнялась ширине или высоте блока.*/
+	
+}
+/*---------------------------------------------------------------------------*/
+.input_box
+{
+	float: right;
+	width: 110px;
+	margin-right: 15px;
+}
+/*---------------------------------------------------------------------------*/
+p
+{
+	margin: 8px 5px 0px 5px;
+}
+/*---------------------------------------------------------------------------*/
+.bold
+{
+	font-weight: bold;
+}
+/*---------------------------------------------------------------------------*/
+p
+{
+	margin-bottom: 20px;
+}
+/*---------------------------------------------------------------------------*/
+div
+{
+float: left;
+}
