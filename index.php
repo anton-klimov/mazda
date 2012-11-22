@@ -1,3 +1,10 @@
+<?php
+/*    $init = true;
+    if ($init) {
+        include ($_SERVER['DOCUMENT_ROOT']."/init_db.php");
+    }
+*/?>
+
 <!DOCTYPE HTML PUBLIC "-//W3C**DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -9,28 +16,28 @@
 	<body>
 		<div class="main_block">
 			<div class="header border">
-				<img src="img/mazda_logo_vi.png" width="199px" height="203px">
+				<img src="img/mazda_logo_vi.png" width="199px" height="203px" alt="logo">
 			</div>
 			<div style="margin-top:5px; width: 100%;">
 				<div class="some_left_block">
 					<div style="background-color: rgb(255, 255, 255); width: 100%; margin-bottom: 20px;" class="border">
 						<ul style="list-style-type: none; margin-left: -30px;">
-							<li><a class="test" href="index.html">Главная</a></li>
+							<li><a class="test" href="index.php">Главная</a></li>
 							<li><a class="test" href="6S.php">Mazda 6 Sedan</a></li>
-							<li><a class="test" href="3MPS.php">Mazda 3 MPS</a></li>
-							<li><a class="test" href="RX8.php">Mazda RX-8</a></li>
-							<li><a class="test" href="CX7.php">Mazda CX-7</a></li>
+							<li><a class="test" href="3mps.php">Mazda 3 MPS</a></li>
+							<li><a class="test" href="rx8.php">Mazda RX-8</a></li>
+							<li><a class="test" href="cx7.php">Mazda CX-7</a></li>
 						</ul>
 					</div>
 					<div style="background-color: rgb(255, 255, 255); width: 100%; margin-bottom: 20px;" class="border">
 						<p style="margin-bottom:25px; text-align: center;">Авторизация</p>
-						<form style="text-align: center; margin-bottom: 20px;" action="auth.php">
-							<label for="login">Логин</label>
-							<input type="text" class="input_box" id="login" name="login">
-							<label for="pass">Пароль</label>
-							<input type="password" class="input_box" id="pass" name="pass"></p>
-							<input type="submit">
-						</form>
+                        <form style="text-align: center; margin-bottom: 20px;" action="auth.php" method="post">
+                            <label for="login">Логин</label>
+                            <input type="text" class="input_box" id="login" name="login">
+                            <label for="pass">Пароль</label>
+                            <input type="password" class="input_box" id="pass" name="pass"></p>
+                            <input type="submit">
+                        </form>
 					</div>
 				</div>
 				<div class="main_text_block border">
@@ -56,7 +63,3 @@
 		</div>	
 	</body>
 </html>
-
-<?php
-    include ($_SERVER['DOCUMENT_ROOT']."ini_db.php");
-?>
