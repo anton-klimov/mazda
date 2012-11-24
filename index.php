@@ -1,9 +1,8 @@
 <?php
-/*    $init = true;
-    if ($init) {
-        include ($_SERVER['DOCUMENT_ROOT']."/init_db.php");
-    }
-*/?>
+{
+
+}
+?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C**DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,15 +29,50 @@
 						</ul>
 					</div>
 					<div style="background-color: rgb(255, 255, 255); width: 100%; margin-bottom: 20px;" class="border">
-						<p style="margin-bottom:25px; text-align: center;">Авторизация</p>
-                        <form style="text-align: center; margin-bottom: 20px;" action="auth.php" method="post">
-                            <label for="login">Логин</label>
-                            <input type="text" class="input_box" id="login" name="login">
-                            <label for="pass">Пароль</label>
-                            <input type="password" class="input_box" id="pass" name="pass"></p>
-                            <input type="submit">
-                        </form>
+                        <?PHP
+                        {
+                            @session_start();
+                            $db_name = 'mazda';
+                            $link = mysql_pconnect('localhost', 'root', '');
+                            if (! $link) {
+                                die('Could not connect' . mysql_error());
+                            }
+                            if (!mysql_select_db($db_name)) {
+                                die("Could not connect to database");
+                            }
+                            $access_token = "0";
+                            if (isset($_SESSION['access_token'])) {
+                                $access_token = $_SESSION['access_token'];
+                                $sql_get_user = "SELECT name, access_token FROM users WHERE access_token=" ."'"
+                                    . $access_token . "';";
+                                if (! $result = mysql_query($sql_get_user, $link)) {
+                                    die("Could not get user" . mysql_error());
+                                }
+                                $row = mysql_fetch_array($result);
+                                if (! $row) {
+                                    die("Wrong login or password");
+                                }
+                                $username = $row['name'];
+                                echo "<p style=\"text-align: center; font-size: 14pt;\">Добро пожаловать $username</p>
+                                    <form style=\"text-align: center\" action=\"<?php @session_destroy();?>\">
+                                        <input style=\"margin-bottom: 10px;\" type=\"submit\" value=\"Выход\"/>
+                                    </form>";
+                            } else {
+                                echo "<p style=\"margin-bottom:25px; text-align: center;\">Авторизация</p>
+                                    <form style=\"text-align: center; margin-bottom: 20px;\" action=\"auth.php\" method=\"post\">
+                                        <label for=\"login\">Логин</label>
+                                        <input type=\"text\" class=\"input_box\" id=\"login\" name=\"login\">
+                                        <label for=\"pass\">Пароль</label>
+                                        <input type=\"password\" class=\"input_box\" id=\"pass\" name=\"pass\"></p>
+                                        <input type=\"submit\" value='Войти'>
+                                    </form>";
+                            }
+                        }
+                        ?>
 					</div>
+<!--                    <div style="background-color: rgb(255, 255, 255); width: 100%; margin-bottom: 20px;" class="border">-->
+<!--                        -->
+<!--                    </div>-->
 				</div>
 				<div class="main_text_block border">
 					<p class="bold" style="text-align:center; margin-top:40px; margin-bottom:20px; font-size:20pt;"> История возникновения марки Mazda</p>

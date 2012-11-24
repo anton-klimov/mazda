@@ -30,7 +30,7 @@
 
     $sql_create_users_table = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT,
                                     name varchar(20) NOT NULL UNIQUE, password VARCHAR(20) NOT NULL,
-                                    type int, INDEX type_id (type),
+                                    type int, INDEX type_id (type), access_token VARCHAR(40),
                                     PRIMARY KEY(id), FOREIGN KEY(type) REFERENCES
                                     $user_types_table_name(id) ON DELETE CASCADE) ENGINE=INNODB;";
     if (! mysql_query($sql_create_users_table, $link)) {
@@ -40,7 +40,8 @@
     $articles_table_name = "articles";
     $sql_create_articles_table = "CREATE TABLE IF NOT EXISTS $articles_table_name(id INT AUTO_INCREMENT,
                                     user INT NOT NULL, INDEX user_id(user), create_date DATE NOT NULL,
-                                    text LONGTEXT, price DECIMAL NOT NULL,
+                                    title VARCHAR(100) NOT NULL UNIQUE,
+                                    text LONGTEXT, photoUrl VARCHAR(100),price DECIMAL NOT NULL,
                                     PRIMARY KEY(id), FOREIGN KEY(user) REFERENCES users(id))
                                     ENGINE=INNODB;";
 
