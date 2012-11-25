@@ -39,8 +39,7 @@
 
     $articles_table_name = "articles";
     $sql_create_articles_table = "CREATE TABLE IF NOT EXISTS $articles_table_name(id INT AUTO_INCREMENT,
-                                    user INT NOT NULL, INDEX user_id(user), create_date DATE NOT NULL,
-                                    title VARCHAR(100) NOT NULL UNIQUE,
+                                    user INT NOT NULL, INDEX user_id(user), title VARCHAR(100) NOT NULL UNIQUE,
                                     text LONGTEXT, photoUrl VARCHAR(100),price DECIMAL NOT NULL,
                                     PRIMARY KEY(id), FOREIGN KEY(user) REFERENCES users(id))
                                     ENGINE=INNODB;";

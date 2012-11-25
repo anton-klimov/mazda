@@ -41,6 +41,6 @@
     mysql_close($link);
 
     header("Location: http://localhost/index.php");
-    ob_end_flush();
+//    ob_end_flush();
 }
 ?>
