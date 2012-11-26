@@ -67,7 +67,7 @@
 <body>
 <div class="main_block">
     <div class="header border">
-        <img src="img/mazda_logo_vi.png" width="199px" height="203px" alt="logo">
+        <img src="img/mazda_logo_vi.png" width="199px" height="203px" alt="logo" onmouseup="window.open('http://localhost/index.php', '_self')">
     </div>
     <div style="margin-top:5px; width: 100%;">
         <div style="background-color: rgb(255, 255, 255); width: 100%; margin-bottom:10px; padding: 10px;" class="border">

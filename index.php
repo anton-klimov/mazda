@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C**DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -9,13 +12,57 @@
             function addArticle() {
                 window.open("./add_article.php","_self");
             }
+
+            function addProduct(id) {
+                window.open("./add_product.php?id=" + id,"_self");
+            }
         </script>
 	</head>
 	<body>
 		<div class="main_block">
 			<div class="header border">
-				<img src="img/mazda_logo_vi.png" width="199px" height="203px" alt="logo">
-			</div>
+                <?php
+                {
+                    session_start();
+                    $query = "";
+                    $total = 0;
+
+                    if (isset($_SESSION['products'])) {
+                        foreach ($_SESSION['products'] as $i => $val) {
+                            $query = $query . "id=$i OR ";
+                        }
+                    }
+
+                    if ($query && isset($_SESSION['products'])) {
+                        $query = substr($query, 0, strlen($query) - 4);
+                        $sql_get_selected_products = "SELECT id, price FROM articles WHERE " . $query . ";";
+
+                        $db_name = 'mazda';
+                        $link = mysql_pconnect('localhost', 'root', '');
+                        if (! $link) {
+                            die('Could not connect' . mysql_error());
+                        }
+                        if (! mysql_select_db($db_name)) {
+                            die("Could not connect to database");
+                        }
+
+                        $result = mysql_query($sql_get_selected_products, $link);
+                        while ($row = mysql_fetch_array($result)) {
+                            $total = $total + $_SESSION['products'][$row['id']] * $row['price'];
+                        }
+                    }
+
+                    echo "
+                    <div style='float: right; margin-right: 20px; margin-top: 20px; width: 200px;
+                            border: black 2px solid; vertical-align: top; background-color: gray;'>
+                        <div style='text-align: center; width: 100%;'><a href='http://localhost/basket.php'>Корзина</a></div>
+                        <div style='margin-bottom: 5px; margin-left: 5px;'>Общая стоимость - $total</div>
+                    </div>
+                ";
+                }
+                ?>
+                <img src="img/mazda_logo_vi.png" width="199px" height="203px" alt="logo" onmouseup="window.open('http://localhost/index.php', '_self')">
+            </div>
 			<div style="margin-top:5px; width: 100%;">
 				<div class="some_left_block">
 					<div style="background-color: rgb(255, 255, 255); width: 100%; margin-bottom: 20px;" class="border">
@@ -56,14 +103,14 @@
                                                 <input type=\"password\" class=\"input_box\" id=\"pass\" name=\"pass\"></p>
                                                 <input type=\"submit\" value='Войти'>
                                             </form>";
-                            @session_start();
+//                            @session_start();
 //                            @session_destroy();
                             $db_name = 'mazda';
                             $link = mysql_pconnect('localhost', 'root', '');
                             if (! $link) {
                                 die('Could not connect' . mysql_error());
                             }
-                            if (!mysql_select_db($db_name)) {
+                            if (! mysql_select_db($db_name)) {
                                 die("Could not connect to database");
                             }
                             $access_token = "0";
@@ -119,7 +166,8 @@
                                 die("Could not connect to database");
                             }
 
-                            $sql_get_article = "SELECT * FROM articles WHERE id=" . $_GET['id'] . ";";
+                            $id = $_GET['id'];
+                            $sql_get_article = "SELECT * FROM articles WHERE id=" . $id . ";";
                             $row = mysql_fetch_array(mysql_query($sql_get_article));
                             if (! $row) {
                                 echo "Bad id";
@@ -130,8 +178,9 @@
                                 <p class='bold' style='float: right; max-width: 35%; text-align:center; margin-top:10px; margin-bottom:20px; margin-right: 10px; font-size:22pt; color: green;'> Цена - " . $row['price'] . " грн.</p></div>
                                 <img src='". $row['photoUrl'] ."' width='450px' height='300px' style='margin: 0px 10px 0px 10px; float: left;'>
                                 <p style='margin: 10px;'>" . $row['text'] . "<p/>
-                            ";
+                                <input style='margin-left: 10px;' type='submit' value='Добавить в корзину' onmousedown='addProduct(". $id .")'/>
 
+                            ";
                             }
                         }
                     ?>

@@ -33,6 +33,7 @@
         die("Can't save access_token");
     }
 
+//    session_destroy();
     session_start();
     $_SESSION['access_token'] = $access_token;
 
