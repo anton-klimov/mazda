@@ -48,12 +48,15 @@
             if (! mysql_query($add_article_sql)) {
                 $_SESSION['title'] = $title;
             } else {
+                unset($_POST['about']);
+                unset($_POST['title']);
+                unset($_POST['price']);
+                unset($_POST['image']);
                 $_SESSION['added'] = true;
             }
         }
     }
 }
-
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C**DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -73,20 +76,20 @@
         <div style="background-color: rgb(255, 255, 255); width: 100%; margin-bottom:10px; padding: 10px;" class="border">
             <form action="" enctype="multipart/form-data" method="post">
                 <label for="title">Заголовок</label>
-                <input type="text" id="title" name="title"><br/>
+                <input type='text' id='title' name='title' value=<?php echo $_POST['title']; ?>><br/>
                 <label for="price">Цена, грн</label>
-                <input type="text" id="price" name="price"/><br/>
+                <input type='text' id='price' name='price' value=<?php echo $_POST['price']; ?>><br/>
                 <label for="image">Изображение</label>
                 <input type="file" accept="image/*" name="image" id="image"/><br/>
                 <label for="about">Описание</label>
-                <textarea rows="15" cols="100" name="about" id="about"></textarea>
+               <textarea rows='15' cols='100' name='about' id='about'><?php echo "$_POST[about]"; ?></textarea>
                 <input type="submit" value="Создать"/>
             </form>
             <?php
             {
 //                session_start();
                 $text = "";
-                if ($_POST) {
+//                if ($_POST) {
                     if ($_SESSION['added']) {
                         unset($_SESSION['added']);
                         $text = "Товар успешно добавлен";
@@ -107,13 +110,15 @@
                     } if (! ($_SESSION['title'] === "")) {
                         $sql_get_article = "SELECT id FROM articles WHERE title='" . $_SESSION['title'] . "';";
                         $res = mysql_query($sql_get_article);
-                        $row = mysql_fetch_array($res);
-                        if ($row) {
-                            $text = "Товар с таким именем уже существует";
+                        if ($res) {
+                            $row = mysql_fetch_array($res);
+                            if ($row) {
+                                $text = "Товар с таким именем уже существует";
+                            }
+                            unset($_SESSION['title']);
                         }
-                        unset($_SESSION['title']);
 
-                    }
+//                    }
                     echo "<p style='width: 100%; margin-top: 10px; margin-bottom:10px; text-align: center; color: red;'>$text</p>";
                 }
             }

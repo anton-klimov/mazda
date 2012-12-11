@@ -31,6 +31,7 @@
     $sql_create_users_table = "CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT,
                                     name varchar(20) NOT NULL UNIQUE, password VARCHAR(20) NOT NULL,
                                     type int, INDEX type_id (type), access_token VARCHAR(40),
+                                    email VARCHAR(40) NOT NULL UNIQUE,
                                     PRIMARY KEY(id), FOREIGN KEY(type) REFERENCES
                                     $user_types_table_name(id) ON DELETE CASCADE) ENGINE=INNODB;";
     if (! mysql_query($sql_create_users_table, $link)) {

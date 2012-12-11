@@ -102,7 +102,9 @@
                                                 <label for=\"pass\">Пароль</label>
                                                 <input type=\"password\" class=\"input_box\" id=\"pass\" name=\"pass\"></p>
                                                 <input type=\"submit\" value='Войти'>
-                                            </form>";
+                                            </form>
+                                            <a href='register.php' style='float: left; width: 100%; text-align: center;'>Регистрация</a>
+                                            ";
 //                            @session_start();
 //                            @session_destroy();
                             $db_name = 'mazda';
@@ -129,7 +131,9 @@
                                     echo "<p style=\"text-align: center; font-size: 14pt;\">Добро пожаловать $username</p>
                                                 <form style=\"text-align: center\" action=\"logout.php\">
                                                     <input type=\"submit\" value=\"Выход\"/>
-                                                </form>
+                                                </form>";
+                                    if ($username === "admin")
+                                    echo "
                                                 <input style=\"margin-bottom: 10px;\" type=\"submit\" value=\"Добавить статью\" onmouseup='addArticle()'/>
                                                 ";
                                 }
